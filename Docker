@@ -1,0 +1,168 @@
+** install docker from 
+https://docs.docker.com/engine/install/ubuntu/
+
+* Run - start a container 
+
+- docker run ngnix 
+
+*ps list all running container
+-docker ps (command use to check running container)
+
+- docker ps -a (command use to check running all container as well pervios stopstop container state)
+
+* stop - stop container
+(using ps command you have to provide docker name)
+
+-docker stop silly_sammat
+
+* rm - remove container
+
+- docker rm silly_sammat (using this command you can remove container)
+
+* how to check list of images in our host Images - to check list of container images
+
+- docker images (using this command you will get available images and sizes)
+
+*rmi - remove images 
+
+- docker rmi ngnix (this command is use to delete images from the host but make sure no container is using this images)
+
+* Pull - download an images
+
+- docker pull ngnix (this command pull the image from host only pull the image not run on the container, so docker pull the image not run on the container)
+
+* How to download and run images from docker hub 
+
+- docker run centos (first its search on local host then it will search and download from docker hub web site)
+
+* how to enter or login in centos container which is downloaded. 
+
+- docker run -it centos bash (using this command you can login into centos container image)
+
+*how to run the command on running container using executive command 
+
+docker exec "container ID" cat /etc/*release*
+
+* how to run something on container 
+ docker run -d ubuntu sleep 100 
+ 
+*** Docker run command
+
+docker run redis:4.0
+
+** how to open port to access particular container
+
+docker run -p 80:5000 kodekloud /simple webapp
+docker run -p 8000:5000 kodekloud /simple webapp
+docker run -p 3306:3306 mysql
+
+**** Docker run advance command
+
+- docker run ubuntu cat /etc/*release* (this command get to know the release version of ubuntu while downloading image)
+
+
+
+docker run -d ubuntu sleep1500
+
+- docker run attach
+
+- docker inspect <container Id> (get to know IP address)
+- 
+
+- how to run the container with open port.
+
+docker run -p 38282:8080 kodekloud/simple-webapp:blue
+
+docker run -p 8282:8080 webapp-color (always put host port then local port)
+
+*** how to check container logs
+
+docker logs <container name>
+
+*** how to check docker IP and other details 
+
+docker inspect <container name>
+
+** to enter into container 
+docker run -it ubuntu bash
+
+** How to Build docker image
+
+- First you have to create dockerfile 
+
+Application code normally copied in  /opt its show as - WORKDIR when you run view dockerfile
+
+* how to run created dockerfile and then run  
+
+$ docker build -t webapp-color . 
+
+** how to know host operating system version from running container
+docker run python:3.6 cat /etc/*release*
+
+** how to run images and assign name to container and open port also add enviorment variable. 
+
+Docker run -p 38282:8080 --blue-app -e APP_COLOR=Blue -d <add docker image name>
+
+hOW TO FIND DETAILS FROM DOCKER FILE USING GREP COMMAND 
+
+cat Dockerfile-mysql | grep ENTRYPOINT
+
+** How to build docker file and tag (-t used for tag)
+
+docker build -t web-color . 
+
+**in YAML file there are two types 
+1. Dictionry 
+2. array 
+
+** How to restrict memory and cpu utalization docker container to use host OS resource.
+
+docker run --cpu=.5 ubuntu
+
+docker run --memory=100m ubuntu
+
+*** to check PID using below command 
+
+docker exec "container ID" ps -eaf
+
+https://docs.docker.com/config/containers/resource_constraints/
+
+*** How docker store data 
+
+- Docker file location in root directory
+
+- ls -l /var/lib/docker
+
+** To get to know Docker host running container & images, docker driver information
+
+- docker info | more
+
+** want to know about docker disk consumation 
+
+docker system diff
+
+** Docker create three network automatically 
+
+1. bridge : default network where container attached too 
+2. none
+3. host 
+
+* how to identifly available network in host 
+
+- docker network ls 
+
+* What is the subnet configured on bridge network?
+
+- docker network inspect bridge
+
+
+
+
+
+
+
+
+
+
+
+
