@@ -1,0 +1,398 @@
+- mkdir
+mkdir /home/tech/
+
+-remove dir commond 
+rmdir tech 
+
+- remove -p (to remove all sub directory)
+
+- to search file or secarch content
+cat greptest.txt
+grep cat graptest.txt (grap used to search word in file)
+
+grep -i "file name" (search senstive case)
+
+-to search particular file 
+
+rep -i FROM /root/webapp-color/Dockerfile
+
+search some content in particular directory using grep command
+
+- grep parmit etc/ssh/sshd_config
+
+- how to use pipline command between grep 
+
+ls -l | grep "contain to search" filename
+
+- how to seprate dirctory and file 
+ls -l | grep ^d 
+
+- sort sorttest.text (used this commind to sort words)
+
+* rights on files and folder
+
+- Three type of permission read, write and excute
+  three type of permsion user, group and other permission
+
+to view permission 
+- ls -l 
+
+- chown commond use to change owner of the file. 
+
+* to change permission of file. 
+
+- chmod 777 abc.ext
+
+* to check open file using below commond 
+- LSOF
+
+* specific user uID and group assoscite with user 
+- id username 
+
+* tar commond use to zip or unzip file
+-tar -cvf filename source-folder (zip folder)
+- tar -xvf tar-file (unzip file)
+
+* cut commond 
+-cat demo1.txt (to view contect)
+- cut -c1-2 demo1.txt
+
+* Unique commond - use to duplicate in the lines.
+* watch commond use to excute 
+* History commond use to list all history commond use
+suppose you have to see last 5 hitostoy commond
+- history 5 
+
+*free commond use to check free memory from system. 
+******************************
+
+SSH - remote command line excution 
+SSH-keygen (to generate public & private key pair for user)
+
+nslookup command - use to troublshoot DNS realted problem
+curl tool use for automation without any user interaction. transfer multiple file at once.
+- curl options URL 
+
+* awk commond use to manipulting data and gernating report. 
+- awk 
+
+*apt get commond use to handel packages in linux (adavance packaging tool)
+- sudo apt-get install pinta (pinta is editior base commond)
+
+*df commond - use by disk system. 
+
+- sudo df -h (disk free space)
+- sudo du -h -d 1 /var (use this to check which part is use more space)
+
+- Man man commonad - you will get all the details in commond
+
+** How to identify the IP address 
+- ip addr (enp03 - inet)
+
+* PWD command 
+
+*** how to find particular folder 
+- find / -name "foldername"
+
+if you want to search in particular folder then
+
+- find myfolder/ -name folder1
+
+** to search particular file in folder 
+- ls folder* (all you will get folder start with folder name)
+
+*** to remove folder 
+rmdir cartoons/
+rm -r media/
+
+** how to remove file 
+rm file1
+rm -f file1
+
+*** to search about particular command   
+ls --help
+man ls
+
+** to know more about file update in details i.e when its created with date and time use below commands
+
+ls -lt (to check latest file updates)
+ls-ltr (updates in revers order )
+
+*** vi command use to edit file 
+    
+** world count 
+wc file name
+wc -l filename 
+
+*** to find out the differnece between two file 
+diff file1 file2
+ rmdir 
+
+**** how to zip file 
+tar cvf files.tar file1 file2
+gzip files.tar
+
+*** how to copy file from one location to another 
+cp files.tar.gz folder1/
+
+*** how to create test file
+touch cool.txt
+vi cool.txt
+cat cool.txt
+
+****how to unzip file 
+gunzip files.tar.zip 
+tar cvf files.tar
+
+**how to rename the file 
+mv cool.txt zool.txt
+
+** get to know os version - ubuntu
+
+cat /etc/*release*
+
+** how to copy content from one file to another using cp command 
+create file- touch file1 file2
+create contain in file1 - cat > file1
+copy contain from file1 to file2 - cp file1 file2
+
+**you can copy file1 from dir1 using same command
+cp file1/dir1
+
+- to open file from dir1
+
+cat dir1/file1
+
+*Cp command only use to copy file & cp -r is use to copy directory
+cp -r dir1 dir2
+
+** how to move command - MV
+mv file2 dir2
+
+- using same MV command you can rename 
+file1 file3
+
+* to check the file & directory type use below command
+
+file fil1 
+file dir1
+
+*** Sed command - strearch editior (to replace word or modified file)
+
+- sed 's/old_txt/new/' file_name (To replace old txt to new text)
+
+- sed 's/old_txt/new/g' file_name (to replace old txt to new text with g its change everything.)
+
+- sed 's/old_txt/new/ig' file_name ()
+
+-sed -i's/old_txt/new/' file_name (its replace old txt with new one update the file)
+
+- sed -n '5,10p' file_name (display 5 to 10 lines)
+
+- sed '10,20d' file_name (Using this command you can delete 10 to 20 lines and remaining its shows.)
+
+** How to add user in system
+
+user Management 
+There are total 3 types of users. 
+
+1. Super or root user: user is the most powerful user, he is the administrator user.
+
+2. system user: users created by the softwares or applications. 
+
+3. normal users: normail users are the users creeated by root user. 
+
+1. super user - root - /root - /bin/bash
+2. system user - ftp,ssh, apache - /var/ftp,etc - /sbin/nologin
+3. normail user - visitor,ec2-user 	- / home/username - /bin/bash  
+
+** How to check all the users
+
+- cat /etc/passwd
+
+** how to all users to access ec2 instance without keybase authentication. 
+for that we have to change in sshd_config file.
+
+- nano /etc/ssh/sshd_config 
+ in the file you have to change "passwordauthentication" option from no to yes
+ 
+ ctrl ^o option to write out the file
+ 
+ - after this cammoand you have to use below command to reload ssh services. 
+ 
+ service ssh reload 
+ 
+ *** File Permision 
+ 
+ - There are three type of file permission 
+ 
+ 1. owner or user level
+ 2. group level
+ 3. other level
+ 
+ - permission are applied in three way
+ 
+ 1. read - read only 
+ 2. w - write/edit/append/delete
+ 3. x - excute/run
+ 
+ ** /tmp directory access by everyone 
+ 
+ ** How to check memory 
+ - free (this command us used to check system memory)
+ - free -m (used to check in megabites)
+ 
+ - In case you want to check system memory information 
+ 
+ cat /etc/meminfo 
+ 
+ - cpu information 
+ 
+ cat /etc/cpuinfo
+ 
+*** show karnal information
+
+uname -a
+
+** to check directory or file size 
+
+du 
+
+du -m 
+
+du /etc/ 
+
+du -k (usually use in var & file
+
+df (this command will know how many file system are there in our system)
+
+*** softwares manangemnt (Centos used yum and ubuntu used apt install )
+
+- yum install <packages name >
+- yum remove <Pakage name>
+- yum update <package name>
+- yum info <package name>
+- yum list available 
+- yum list installed
+
+
+** Get to know the package install or not 
+
+- yum list installed
+
+   or 
+   
+you have to find out particular package
+
+- yum list insta | grep wget
+
+** how to edit hostname file 
+- hostname
+
+hostname store at 
+
+- cat /etc/hostname
+
+how to change or edit hostname
+
+vi /etc/hostname
+
+** init 6 - use to restart the server 
+
+** wget use to download the packages or software directly from link. 
+
+wget https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.83/bin/apache-tomcat-8.5.83-windows-x86.zip
+
+** to identify ip address use below command
+- ifconfig
+
+** how to i which applications use which port 
+
+- netstat -tulpn
+
+* to identify which port is use in or not 
+
+telnet localhost 80
+
+telnet localhost 22
+
+**** Services start and stop with checkconfig command
+
+- service <service name> status
+- service <service name> start
+- service <service name> stop 
+- service <service name> reload 
+- service <service name> restart
+
+- chkconfig --list (to check availbilty of service)
+- chkconfig <service name> on (to make service available after restart)
+- chkconfig <service name> off (to make service unavailable after restart)
+
+ ** Process manangemnt
+ 
+- ps -ef (so many process runnuning on your system)
+- ps -ef | grep httpd (to search particular process using grep command)
+- ps  -ef | grep mark (to search particular user process ID to kill or just check account)
+
+- kill 9 <process ID> (to kill particular process)
+- top (top command give you cpu utalization process)
+- fg & bg (used to run the proccess)
+ 
+** Archiving file and dirctory
+- yum install gzip (to install gzip file)
+- gzip <file name> (using this we can zip file)
+- gunzip <file name> (using this command we can unzip file)
+
+- tar -xvzf <file name> (command use to extract and zip file for example tomcat file)
+
+** crontab (used to schduling job)
+crontab -e
+
+** soft link and hardlink 
+softlink - shortcut file same as windows we created.
+hardlink - like backup file 
+
+- ln -s <source file > <destination file> (softlink - command use to create short cut file mostly use in script shortcut)
+- ln  <sourcedile> <destination file > (create copy of your file)
+
+** Remote tool. 
+- remote tool mobaxterm & Wincp
+
+** How to transfer server file from another server or vise versa
+
+- 
+linux to linux 
+
+scp (secure copy) is a command -line utlity that allow to securly copy file from one directory to another server directory 
+
+- scp <source_file_name> <username@destinaltion_host>:<destination_folder_name>
+
+example
+
+   scp file1 root@10.20.30.40:/two
+   
+   scp root@10.20.30.40:/two /home/tech/
+
+** SSH keygen 
+
+- using SSH-keygen we can generate keys.
+ 
+ #ssh-keygen -t rsa -b 4096 (its most secure way to generate a private key)
+ 
+id_rsa (Private key format)
+
+id_rda.pub (public key format)
+
+** how to copy ssh key 
+
+- ssh-copy-id <server IP or name>
+
+     or
+- else you can copy private key on target server folder /home/.ssh/id_rsa folder you have to create this. 
+
+
+
+
+
+ 
+ 
