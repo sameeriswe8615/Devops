@@ -1,0 +1,198 @@
+** Docker swarn
+- docker manage large application into small microservices. 
+
+-* how to make docker master in cluster 
+
+- docker swarm init  (this command run on Master node)
+
+- docker node ls (command use to see the master and member of cluster)
+
+- docker swarm join-token worker or master (this command is use to make another container is in your cluster member)
+
+- docker service create --name webapp1 --replicas=6 nginx (create node and run the services)
+
+- docker service ls 
+
+- docker ps
+
+*** Autolock for swarm
+https://docs.docker.com/engine/swarm/swarm_manager_locking/
+
+docker swarm init --autolock
+
+to existing swarm enable use below command
+- docker swarm update --autolock=true (SWMKEY-1-Qxy+6TsnXBGQiAfc1yFUJRckIb6622p+InkqpUZBH78)
+
+- docker swarm unlock (To unlock docker use)
+
+- docker swarm unlock-key (to view the key)
+
+- docker swarm unlock-key --rotate (to rotate key or change key)
+
+- docker info | more
+
+-- ** To vistualize docker use below link to configure 
+
+https://github.com/dockersamples/docker-swarm-visualizer
+
+-- ip addr (command use to get to know the ip address)
+
+*** In case you want to find any particular command in swarm cluster then user below command
+
+- docker inspect webapp1 
+
+- docker inspect webapp1 | grep Replicas
+
+- docker inspect ee6d | grep IPAddress
+
+*** Docker stack 
+
+https://docs.docker.com/engine/reference/commandline/stack/
+
+** how to update docker stack file for example increase replicas
+ There are two way to update one is update from cammand or update stack ymal file.
+
+- docker service update --replicas=20 mystack_web
+
+- docker stack deploy --compose-file docker-stack.ymal mystack_web
+
+
+*** Docker service
+
+https://docs.docker.com/engine/reference/commandline/service_update/
+
+- docker service update --publish-add published=8080,target=80 "myservice"
+
+** Using Inspect command we can see image configuration information and also save the config file any loction. 
+https://docs.docker.com/engine/reference/commandline/inspect/ 
+
+- docker image inspect ubuntu:latest | grep "os" or "ip information"
+
+- docker image inspect ubuntu:latest > ubuntu.txt (Use this command to save the file)
+
+** to get exect information from docker file 
+
+- docker image inspect ubuntu:latest --format='{{.ContainerConfig}}'
+
+if you want output in json format then 
+
+- docker image inspect ubuntu:latest --format='{{json .ContainerConfig}}'
+
+or else if you want sub file in ContainerConfig 
+- docker image inspect ubuntu:latest --format='{{json .ContainerConfig.Hostname}}'
+
+This above same command we used for the container information
+
+- docker container inspect --format='{{json .Networksettings}}'
+
+*** Docker Tag (use below command for to tag the image)
+
+https://docs.docker.com/engine/reference/commandline/tag/
+
+- docker image tage "image ID" myapp:latest (key & value)
+
+to create new image with existing image and assign the tag 
+
+- docker image tag myapp:latest myapp:origional (In that case Image ID will be same)
+
+*** Docker build 
+https://docs.docker.com/engine/reference/commandline/build/
+
+Best practices to write docker file 
+
+https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
+
+*** how to make container in zip file 
+
+docker container "container name" < container.tar 
+
+*** Docker registery (storing images)
+
+- docker has local registy 
+- Docker trusted registery (graphical access)
+- docker hub  (cloud base registery)
+
+use below command to build local docker registery
+
+- docker run -d -p 5000:5000 --restart=always --name registry registry:2
+
+how to rename ubuntu tag to upload on docker local registery
+
+- docker tag ubuntu localhost:5000/ubuntu:ver2
+
+How to download docker image from the docker registry
+
+- docker push localhost:5000/ubuntu:ver2
+
+Docker trusted registry have graphical interface
+
+*** how to login in docker hub & local registry, and trusted registery
+
+- docker login 
+- docker logout 
+
+to login in local docker registry
+
+- docker login localhost:5000
+
+to login in docker trusted registry
+
+- docker login "IP address of DTR"
+
+how to tag the image before push to docker hub 
+
+- docker tag nginx:latest sameeriswe24/nginx:latest
+
+how to push from docker image in hub docker 
+
+- docker push sameeriswe24/nginx:latest
+
+how to pull image from docker hub
+
+- docker pull sameeriswe24/nginx:latest
+
+** search option for docker images in docker hub  
+
+- docker search ubuntu (you will get all the available ubuntu images)
+
+- docker search --limit=1 ubuntu (you will get best like image by other)
+
+if you want official image 
+
+- docker search --filter "is-official=true" ubuntu 
+- docker search --filter "star=80" ubuntu 
+
+# to check the size of running container 
+
+- docker ps -s 
+
+# how to check storage driver type 
+
+- docker info | more (using this option you will get all the information about docker inculding how many container & images on server)
+
+using above command you can identify storage driver and Backing filesystem
+
+# how to take docker container backup 
+
+before you have to stop docker 
+- sudo systemctl stop docker
+
+- cp -au /var/lib/docker /var/lib/docker.bk (or foldername) or create dockerbackup folder and past it
+
+# below is the file location where you can edit your docker file for example mapping & overlay storage 
+/etc/docker/daemon.json
+
+# to save docker image before do any changes like device storage changes.
+
+docker save
+
+# docker volume 
+
+- docker volume ls (to get the volume information which is attached with container)
+
+- docker volume (command use to suggest the use)
+
+# docker image prune (to clean dangling image)
+
+
+
