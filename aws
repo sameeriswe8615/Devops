@@ -1,0 +1,13 @@
+- to get to know the role of login in aws use below command
+
+aws sts get-caller-identity 
+
+
+ubuntu or root on ubuntu AMIs
+ec2-user on Amazon Linux AMI
+centos on Centos AMI
+debian or root on Debian AMIs
+ec2-user or fedora on Fedora
+ec2-user or root on: RHEL AMI, SUSE AMI, other ones.
+
+ 
