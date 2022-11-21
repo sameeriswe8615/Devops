@@ -1,0 +1,258 @@
+- Enviorment Variable 
+   its always in uppar case 
+   echo $VAR_NAME
+
+-tree commoand 
+
+- user-group-other
+
+*** Permisiion on folder 
+
+read,write & excute 
+
+chmod g+rwx sales.data (to add the permission)
+chmod g-rwx sales.data (to remove the permission)
+
+user (u) , group (g), excute (x) this three are permission session in any file 
+
+***permission on file and folder 
+
+-rwx------ 700
+-rwxr-xr-x 755
+-rw-rw-r-- 664
+-rw-rw---- 660
+-rw-r--r-- 644
+
+****************************************
+sudo useradd <username>	
+Adding a new user
+
+sudo passwd <username>	Setting a password for the new user
+sudo userdel <username>	 Deleting the user
+sudo groupadd <groupname>	Adding a new group
+sudo groupdel <groupname>	 Deleting the  group
+sudo usermod -g <groupname> <username>	Adding a user to a primary group
+*** change owner 
+chown username:groupname filename
+
+list of all users 
+cat /etc/passwd
+awk -F':' '{ print $1}' /etc/passwd
+
+*getent passwd | cut -d: -f1 (to get list of all users details) 
+
+Find out whether a user account exists in the Linux server
+
+compgen -u | grep vivek
+getent passwd | grep -q sai && echo "User sai found" || echo "User sai not found"
+compgen -u | grep -q ram && echo "User ram found" || echo "User ram not found"
+
+*compgen -u | grep vivek
+
+How to count user accounts in the Linux server
+
+compgen -u | wc -l
+getent passwd | wc -l
+
+
+*** Wildcart 
+
+- ls *.txt (this command use to list all the txt file)
+
+All the file start with later a then use below command 
+
+- ls a
+- ls a*.txt
+
+with ? mark option you will get single charchter file 
+- ls ?
+- ls ??
+- ls ???
+
+to list all the file with specfic charchter
+
+- ls [a-d]*
+
+list file with end with digit
+
+- ls * [[:digit:]]
+
+to move all txt file in folder 
+- mv *.txt notes
+
+*** comparing file 
+- diff file1 file2 (compaire two files)
+- sdifff file file2 (side by side comparision)
+- vimdiff file1 file2 (Highlightes difference in vim)
+
+*** Searching file using grep command
+- grep "content to search" "filename"
+
+to get the user password using grep and pipe commnad
+- grep bob /etc/passwd
+
+to sort the things
+
+- grep bob /etc/passwd | cut -d f1,5
+
+to sort the things
+
+- grep bob etc/passwd | cut -d f1,5 | sort
+
+if you want the result in table format then use below command 
+
+- grep bob etc/passwd | cut -d f1,5 | sort | tr ":" "" | column -t
+
+to check the list of users 
+
+- cat /etc/passwd
+
+
+*** to copy file from over the network
+- SCP : secure copy
+- SFTP : ssh file transfer protocol 
+
+graphical file transfer tool 
+- cyberduck 
+- filezila 
+- winscp 
+
+using sftp option you can connect to remote server 
+
+- sftp "server name" (then it will prompot you for the password)
+- lpwd (command use to check a working directory)
+- put z.txt (using this command you can transfer z.txt file to the remote server)
+
+using scp command as well we can transfer the file 
+
+- scp "file name" "remoteserver name":\home\test (here we can past the file from local to remote test directory)
+ ie. scp z.txt linuxsvr:\home\test
+ 
+ using scp transfer file remote user
+-scp z.txt admin@linuxsvr:/home/admin
+
+same command use for sftp 
+- sftp admin@linuxsvr
+
+*** set alias 
+- alias ll= ls -l
+for one more exmple 
+
+- alias cls= 'clear'
+
+*** User account & group management 
+- cat /etc/passwd
+
+default user is root user 
+ The format of the /etc/passwd 
+ 
+ username:password:UID:GID:comments:home_dir:shell
+
+where is the password saved in linux system 
+
+- /etc/shadow
+
+** lets create the user account 
+
+- useradd [options] username
+
+* -c "comments" comments for the account 
+* -m create the home directory
+* -s/shell/path the path to the users shell 
+
+- more adduser option 
+
+* -r  create a system account 
+* -d/home/dir specify the home directory
+
+** usermod command is used to do existing changes with the account. 
+
+-  usermod [options] username 
+
+* -c "comments" (comments account)
+* -g GROUP (Specify the default group)
+* -G GROUP1,GROUPN (Additional groups.)
+* -s/shell/path (path to the user shell)
+
+** how to get particular user details 
+
+- grep sameer /etc/passwd
+
+*** group are saved in /etc/group 
+
+the format of the /etc/group file:
+-  group_name:password:GID:account1, accountN
+
+- to add group user 
+
+groupadd web (here you have to mention group name)
+
+to check the active group created against the user name
+
+tail -l /etc/group
+
+# groupadd -g 2500 db (-g is used to specfic GID and DB is the group name )
+
+# group modification command
+
+- groupmod [options] group_name
+
+ -g GID (change the group ID to GID)
+ -n GROUP (rename the group to GROUP)
+
+# groupmod -g 1234 devops (to change the guid)
+
+# groupmode -n http (new name) web (old name)
+
+# user create and add in group 
+
+- useradd -c "Amit kori" -g writer -G tv -m -s /bin/bash akori
+- passwd akori
+
+# to check user exist group 
+
+- groups akori
+
+# to check user in group were added 
+- groups akori 
+- groups rkadam
+
+# to get information about group and added memmbership 
+- getent group tv (you will get a list of users who are the members)
+
+- to get group list 
+getent group 
+
+# how to add user in group 
+- usermod -G adm "username" 
+- getent group adm  (to get the information and members of group)
+
+# Linux software installation & search 
+
+- to check machine archtecture 
+
+uname -m 
+
+# to identify list of package install on centos 
+
+rpm -qa
+
+or you want to search for particular package
+
+rpm -q example (example is the package name)
+
+rpm -ql example (this command will provide you installation location of package)
+
+#to remove package
+
+- rpm -e example
+
+# to check your system is update with security packagfe 
+
+apt upgrade 
+
+
+
+
+
+
