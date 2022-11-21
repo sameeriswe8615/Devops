@@ -1,0 +1,65 @@
+**Kubernates
+
+- "kublelet" is the agent that run on each node. 
+- Master communcate with node using kublelet
+- node to node communcate with each other "K-proxy"
+- container runtime is communcation between kublelet and k-proxy
+
+
+
+
+** Pods
+- we can not deploy our container directly in kubernates cluster. 
+- there is small componet use by kubernates for container is the Pods
+- we can deploy contain in pods
+- Pod working under node. 
+- Rememeber NPC (node - pod- container)
+- each pod have uinque IP address.
+- one pod you can run only one container
+
+** Replicast and deployment 
+- Replicast state manage desire state - all node 
+- Deploymenet - upgrade,scale and undo - basiclly manage container
+- Replicast - Manages pods with label 
+
+*** to get POD information 
+- kubectl get pods
+- kubectl describe pod nginix
+- kubectl get pod -o wide
+
+*** How to add new node in existing cluster 
+- kubeadm token list 
+
+Create a new pod with the nginx image.
+- kubectl run nginx
+
+To check which node are use to run pode
+- kubectl describe pod "podname"
+- kubectl get pod -o wide (this command shows the details node)
+
+How to update replicaset image 
+- kubectl edit replicaset "replicaset name" (once you enter you can edit replicaset ymal file.)
+
+if you want to help on some commnands
+- kubctl create deployment --help 
+
+How to check rollout status. 
+
+kubctl rollout status deployment/"rollout file name"
+
+How to check history of deployment
+- kubctl rollout history deployment/"rollout file name"
+
+How to use rollback command
+- kubctl rollout undo deployment/"rollout file name"
+
+How many Services exist on the system?
+- kubctl get service
+
+To get to know runing service specification. 
+
+kubctl get service "kubernetes" (here is the kubernates default service is cluster IP and you can mention load balancer and nord service name is well)
+
+to get to know how many deployment running on the node. 
+
+kubectl get deployment
